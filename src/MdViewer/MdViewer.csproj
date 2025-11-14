@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.43.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MdViewer", "src\MdViewer\MdViewer.csproj", "{1586B0A4-2F36-31F6-9F18-4AB0320E36CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MdViewer.SampleApp", "tests\MdViewer.SampleApp\MdViewer.SampleApp.csproj", "{D0C91F52-33EB-43C2-97B6-38FB223CB833}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1586B0A4-2F36-31F6-9F18-4AB0320E36CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1586B0A4-2F36-31F6-9F18-4AB0320E36CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1586B0A4-2F36-31F6-9F18-4AB0320E36CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1586B0A4-2F36-31F6-9F18-4AB0320E36CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C91F52-33EB-43C2-97B6-38FB223CB833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C91F52-33EB-43C2-97B6-38FB223CB833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C91F52-33EB-43C2-97B6-38FB223CB833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C91F52-33EB-43C2-97B6-38FB223CB833}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7939E6C8-4BA3-40AE-A7EA-A37173F96DAD}
+	EndGlobalSection
+EndGlobal
