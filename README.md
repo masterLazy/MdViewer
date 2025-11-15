@@ -42,7 +42,10 @@ Steps to add `MdViewer` to your project:
 4. Call `Dispose()` when the window is closed to clean up the temporary file:
 
     ```csharp
-    MdViewer.Dispose();
+    protected override void OnClosed(EventArgs e) {
+        base.OnClosed(e);
+        MdViewer.Dispose();
+    }
     ```
 ## Screenshot
 
