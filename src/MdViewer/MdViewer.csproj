@@ -1,22 +1,50 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<Version>1.0.0</Version>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Title>MdViewer</Title>
+		<PackageId>mdviewer</PackageId>
+		<Authors>masterLazy</Authors>
+		<Company>masterLazy</Company>
+		<RepositoryUrl>https://github.com/masterLazy/MdViewer</RepositoryUrl>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/masterLazy/MdViewer</PackageProjectUrl>
+		<Copyright>Copyright 2025 masterLazy</Copyright>
+		<Description>Lightweight WPF Markdown viewer control for .NET 10.</Description>
+		<PackageIcon>MdViewer.png</PackageIcon>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="style.css" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="style.css" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="style.css" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="style.css" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.43.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\MdViewer.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Markdig" Version="0.43.0" />
+	</ItemGroup>
 
 </Project>

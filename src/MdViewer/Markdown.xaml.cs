@@ -19,11 +19,13 @@ using System.IO;
 
 namespace MdViewer {
     /// <summary>
-    /// MdViewer.xaml 的交互逻辑
+    /// Interaction logic of MdViewer.xaml
     /// </summary>
     public partial class Markdown : UserControl, IDisposable {
-        private string _tempHtmlFile; // Temporary Html file
+        // Temporary files
+        private readonly string _tempHtmlFile;
 
+        // "Content" Property
         public new static readonly DependencyProperty ContentProperty =
            DependencyProperty.Register("Content", typeof(string), typeof(Markdown));
         public new string Content {
@@ -56,7 +58,7 @@ namespace MdViewer {
         }
 
         private void LoadMarkdown() {
-            File.WriteAllText(_tempHtmlFile, MdConverter.ToHtml(Content));
+            File.WriteAllText(_tempHtmlFile, MdConverter.ToHtml(Content, this));
             WebViewer.Navigate(new Uri(_tempHtmlFile));
         }
     }

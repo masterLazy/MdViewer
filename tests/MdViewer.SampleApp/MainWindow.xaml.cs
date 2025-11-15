@@ -13,16 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MdViewer.SampleApp {
     /// <summary>
@@ -31,11 +22,19 @@ namespace MdViewer.SampleApp {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            MdViewer.Content = @"# 这是标题
+            MdViewer.Content = @"# Welcome to MdViewer
 
-And this is some text with **bold**, *italic* and ~~delete-line~~. 中文效果如何？
+And this is some text with **bold**, *italic* and ~~delete-line~~.
+
+## 这是一个中文标题
+
+中文的显示效果如何呢？
+
+---
 
 Can you see this `inline code block` ?
+
+> This is a quote.
 
 ```cpp
 #include <iostream>
@@ -47,6 +46,12 @@ int main() {
 ```
 
 - This is an unordered list.
+- This is the second item of the unordered list.
+  - This is a sub-list.
+    - This is a sub-sub-list.
+        - This is a sub-sub-sub-list.
+
+1. Ordered list is also supported.
 
 ## ...and this is a h2 title
 

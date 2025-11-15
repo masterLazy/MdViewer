@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:MdViewer.SampleApp"
         xmlns:md="clr-namespace:MdViewer;assembly=MdViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
-        <md:Markdown x:Name="MdViewer"/>
+        <md:Markdown x:Name="MdViewer" FontSize="16"/>
     </Grid>
 </Window>
