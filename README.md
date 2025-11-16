@@ -1,8 +1,12 @@
 # MdViewer
 
+<img src="img/MdViewer.png" width="162px" align="right"/>
+
 Lightweight WPF Markdown viewer control for .NET 10.
 
 `MdViewer` is a small WPF `UserControl` that converts Markdown to HTML (via `Markdig`) and displays it using the built-in `WebBrowser` control.
+
+<br />
 
 ## Features
 
