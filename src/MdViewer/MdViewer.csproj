@@ -21,10 +21,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="colorcode.css" />
 		<None Remove="style.css" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="colorcode.css" />
 		<EmbeddedResource Include="style.css" />
 	</ItemGroup>
 
@@ -44,6 +46,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ColorCode.HTML" Version="2.0.15" />
 		<PackageReference Include="Markdig" Version="0.43.0" />
 	</ItemGroup>
 

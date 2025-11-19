@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
 
 namespace MdViewer {
     /// <summary>
@@ -52,6 +52,7 @@ namespace MdViewer {
         }
 
         public void Dispose() {
+            GC.SuppressFinalize(this);
             if (File.Exists(_tempHtmlFile)) {
                 File.Delete(_tempHtmlFile);
             }
