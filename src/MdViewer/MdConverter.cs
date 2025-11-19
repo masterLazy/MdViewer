@@ -40,7 +40,15 @@ namespace MdViewer {
         public static string ToHtml(in string markdown, in UserControl userControl) {
             if (markdown == null) return MakeHtml("", userControl);
             var rawHtml = Markdig.Markdown.ToHtml(markdown, _pipeline);
-            return MakeHtml(ProcessHtml(rawHtml), userControl);
+            try {
+                rawHtml = ProcessHtml(rawHtml);
+            }
+            catch (Exception e) {
+                rawHtml = "<div style=\"color:tomato;background:#fafa88;border:tomato solid 1px;padding:8px\">" +
+                    "<p style=\"margin:0\">Exception occurred during processing html. Some functions have been disabled.</p>" +
+                    $"<pre><code>{e.Message}<code></pre></div>" + rawHtml;
+            }
+            return MakeHtml(rawHtml, userControl);
         }
 
         private static string MakeHtml(in string body, in UserControl userControl) {
@@ -59,6 +67,9 @@ namespace MdViewer {
             for (int i = 0; i < html.Length; i++) {
                 if (html[i] == '<') {
                     var end = html.ToString().IndexOf('>', i);
+                    if (end == -1) {
+                        throw new Exception($"No matching closing tag found for '<' at {i}");
+                    }
                     var element = html.ToString()[i..(end + 1)];
                     // End of element
                     if (element.StartsWith("</")) {
@@ -130,10 +141,19 @@ namespace MdViewer {
         }
 
         private static string GetPre(in HtmlContext ctx) {
-            var raw = _formatter.GetHtmlString(ctx.CodeContent, Languages.FindById(ctx.CodeLang));
-            int s = raw.IndexOf('>', raw.IndexOf("<pre")) + 1;
-            int t = raw.IndexOf("</pre");
-            return "<code>" + raw[s..t].Trim() + "</code>";
+            if (ctx.CodeLang == "jsx" || ctx.CodeLang == "tsx") {
+                ctx.CodeLang = "html";
+            }
+            try {
+                var raw = _formatter.GetHtmlString(ctx.CodeContent, Languages.FindById(ctx.CodeLang));
+                int s = raw.IndexOf('>', raw.IndexOf("<pre")) + 1;
+                int t = raw.IndexOf("</pre");
+                return "<code>" + raw[s..t].Trim() + "</code>";
+            }
+            catch (Exception e) {
+                // throw new Exception(e.Message + $"(language: '{ctx.CodeLang}')");
+                return ctx.CodeContent;
+            }
         }
     }
 }
