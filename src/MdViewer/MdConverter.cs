@@ -40,15 +40,24 @@ namespace MdViewer {
         public static string ToHtml(in string markdown, in UserControl userControl) {
             if (markdown == null) return MakeHtml("", userControl);
             var rawHtml = Markdig.Markdown.ToHtml(markdown, _pipeline);
+            _firstException = null;
             try {
                 rawHtml = ProcessHtml(rawHtml);
             }
             catch (Exception e) {
-                rawHtml = "<div style=\"color:tomato;background:#fafa88;border:tomato solid 1px;padding:8px\">" +
-                    "<p style=\"margin:0\">Exception occurred during processing html. Some functions have been disabled.</p>" +
-                    $"<pre><code>{e.Message}<code></pre></div>" + rawHtml;
+                rawHtml = MakeErrorAlert(true, e) + rawHtml;
+            }
+            if (_firstException != null) {
+                rawHtml = MakeErrorAlert(false, _firstException) + rawHtml;
             }
             return MakeHtml(rawHtml, userControl);
+        }
+
+        private static string MakeErrorAlert(bool isFatal, in Exception e) {
+            return "<div style=\"color:tomato;background:#fafa88;border:tomato solid 1px;padding:8px\">" +
+                    $"<p style=\"margin:0\">{(isFatal ? "Fatal" : "Error")}: " +
+                    "Exception(s) occurred during processing html. Some functions have been disabled.</p>" +
+                    $"<pre><code>{e.Message}<code></pre></div>";
         }
 
         private static string MakeHtml(in string body, in UserControl userControl) {
@@ -60,6 +69,7 @@ namespace MdViewer {
             return $@"<html><head>{sbHead}</head><body>{body}</body></html>";
         }
 
+        private static Exception? _firstException = null;
         private static string ProcessHtml(in string rawHtml) {
             StringBuilder html = new(rawHtml);
             Stack<string> stack = [];
@@ -141,7 +151,9 @@ namespace MdViewer {
         }
 
         private static string GetPre(in HtmlContext ctx) {
-            if (ctx.CodeLang == "jsx" || ctx.CodeLang == "tsx") {
+            if (string.IsNullOrEmpty(ctx.CodeLang)) {
+                return ctx.CodeContent;
+            } else if (ctx.CodeLang == "jsx" || ctx.CodeLang == "tsx") {
                 ctx.CodeLang = "html";
             }
             try {
@@ -151,7 +163,7 @@ namespace MdViewer {
                 return "<code>" + raw[s..t].Trim() + "</code>";
             }
             catch (Exception e) {
-                // throw new Exception(e.Message + $"(language: '{ctx.CodeLang}')");
+                _firstException ??= new Exception(e.Message + $" (language: '{ctx.CodeLang}')");
                 return ctx.CodeContent;
             }
         }
