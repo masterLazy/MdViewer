@@ -13,8 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace MdViewer.SampleApp {
@@ -23,5 +21,4 @@ namespace MdViewer.SampleApp {
     /// </summary>
     public partial class App : Application {
     }
-
 }

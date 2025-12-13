@@ -30,36 +30,42 @@ And this is some text with **bold**, *italic* and ~~delete-line~~.
 
 中文的显示效果如何呢？
 
----
-
 Can you see this `inline code block` ?
+
+Is this [LINK](https://www.example.com) available?
 
 > This is a quote.
 
-```cpp
-#include <iostream>
-using namespace std;
-int main() {
-    cout << ""Hello, world!"" << endl;
-    return 0;
-}
-```
+---
 
 - This is an unordered list.
-- This is the second item of the unordered list.
-  - This is a sub-list.
-    - This is a sub-sub-list.
-        - This is a sub-sub-sub-list.
 
 1. Ordered list is also supported.
 
-## ...and this is a h2 title
-
-Is this [LINK](https://www.example.com) avaliable?
-
 | A | B |
 |---|---|
-|This should be|a table|";
+|This should be|a table|
+
+## Code block
+
+```markdown
+# Code highlighting is available
+This is a markdown in **markdown**.
+```
+```cpp
+// C++
+#include <iostream>
+using namespace std;
+int main() {
+    cout << ""Hello, world!\n"";
+    return 0;
+}
+```
+```html
+<!--html-->
+<h1>Hello, world!</h1>
+```
+";
         }
 
         protected override void OnClosed(EventArgs e) {
