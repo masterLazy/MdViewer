@@ -152,7 +152,7 @@ namespace MdViewer {
 
         private static string GetPre(in HtmlContext ctx) {
             if (string.IsNullOrEmpty(ctx.CodeLang)) {
-                return ctx.CodeContent;
+                return "<code>" + ctx.CodeContent + "</code>";
             } else if (ctx.CodeLang == "jsx" || ctx.CodeLang == "tsx") {
                 ctx.CodeLang = "html";
             }

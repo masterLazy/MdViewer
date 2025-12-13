@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MdViewer.SampleEditor"
         xmlns:md="clr-namespace:MdViewer;assembly=MdViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200"
+        Title="SampleEditor" Height="800" Width="1200"
         x:Name="root">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
