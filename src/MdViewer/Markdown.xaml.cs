@@ -21,9 +21,10 @@ namespace MdViewer {
     /// <summary>
     /// Interaction logic of MdViewer.xaml
     /// </summary>
-    public partial class Markdown : UserControl, IDisposable {
+    public partial class Markdown : UserControl {
         // Temporary files
-        private readonly string _tempHtmlFile;
+        private string _html = "";
+        private bool isLoading = false;
 
         // "Content" Property
         public new static readonly DependencyProperty ContentProperty =
@@ -38,29 +39,20 @@ namespace MdViewer {
 
         public Markdown() {
             InitializeComponent();
-            _tempHtmlFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
             LoadMarkdown();
-
-            WebViewer.Navigating += (s, e) => {
-                var uri = e.Uri.ToString();
-                // Use default browser when navigating to internet
-                if (uri.StartsWith("https://") || uri.StartsWith("http://")) {
-                    e.Cancel = true;
-                    System.Diagnostics.Process.Start("explorer.exe", uri);
-                }
-            };
         }
 
-        public void Dispose() {
-            GC.SuppressFinalize(this);
-            if (File.Exists(_tempHtmlFile)) {
-                File.Delete(_tempHtmlFile);
-            }
+        private async void LoadMarkdown() {
+            _html = MdConverter.ToHtml(Content, this);
+            if (isLoading) return;
+            await LoadHtml();
         }
 
-        private void LoadMarkdown() {
-            File.WriteAllText(_tempHtmlFile, MdConverter.ToHtml(Content, this));
-            WebViewer.Navigate(new Uri(_tempHtmlFile));
+        private async Task LoadHtml() {
+            isLoading = true;
+            await WebViewer.EnsureCoreWebView2Async();
+            WebViewer.NavigateToString(_html);
+            isLoading = false;
         }
     }
 }
