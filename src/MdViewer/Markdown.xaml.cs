@@ -21,9 +21,7 @@ namespace MdViewer {
     /// <summary>
     /// Interaction logic of MdViewer.xaml
     /// </summary>
-    public partial class Markdown : UserControl, IDisposable {
-        // Temporary files
-        private readonly string _tempHtmlFile;
+    public partial class Markdown : UserControl {
 
         // "Content" Property
         public new static readonly DependencyProperty ContentProperty =
@@ -38,29 +36,12 @@ namespace MdViewer {
 
         public Markdown() {
             InitializeComponent();
-            _tempHtmlFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".html");
             LoadMarkdown();
-
-            WebViewer.Navigating += (s, e) => {
-                var uri = e.Uri.ToString();
-                // Use default browser when navigating to internet
-                if (uri.StartsWith("https://") || uri.StartsWith("http://")) {
-                    e.Cancel = true;
-                    System.Diagnostics.Process.Start("explorer.exe", uri);
-                }
-            };
-        }
-
-        public void Dispose() {
-            GC.SuppressFinalize(this);
-            if (File.Exists(_tempHtmlFile)) {
-                File.Delete(_tempHtmlFile);
-            }
         }
 
         private void LoadMarkdown() {
-            File.WriteAllText(_tempHtmlFile, MdConverter.ToHtml(Content, this));
-            WebViewer.Navigate(new Uri(_tempHtmlFile));
+            File.WriteAllText("D:/0.html", MdConverter.ToHtml(Content, this));
+            HtmlPanel.Text = MdConverter.ToHtml(Content, this);
         }
     }
 }

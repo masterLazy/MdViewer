@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MdViewer"
+             xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
              mc:Ignorable="d"
              x:Name="root">
-    <WebBrowser Width="{Binding ElementName=root, Path=Width}"
+    <wpf:HtmlPanel Width="{Binding ElementName=root, Path=Width}"
                 Height="{Binding ElementName=root, Path=Height}"
-                x:Name="WebViewer"/>
+                x:Name="HtmlPanel"/>
 </UserControl>
