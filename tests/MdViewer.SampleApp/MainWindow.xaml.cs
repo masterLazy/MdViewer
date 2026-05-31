@@ -70,7 +70,6 @@ int main() {
 
         protected override void OnClosed(EventArgs e) {
             base.OnClosed(e);
-            MdViewer.Dispose();
         }
     }
 }

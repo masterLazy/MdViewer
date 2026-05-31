@@ -84,9 +84,7 @@ namespace MdViewer {
                     // End of element
                     if (element.StartsWith("</")) {
                         stack.Pop();
-                        if (element.StartsWith("</ul") || element.StartsWith("</ol")) {
-                            ctx.ListDepth--;
-                        } else if (element.StartsWith("</pre")) {
+                        if (element.StartsWith("</pre")) {
                             var oldPre = html.ToString()[ctx.PreStart..i];
                             var newPre = GetPre(ctx);
                             html.Remove(ctx.PreStart, oldPre.Length);
@@ -99,13 +97,7 @@ namespace MdViewer {
                     }
                     // Begin of element
                     else if (!element.EndsWith("/>")) {
-                        if (element.StartsWith("<ul") || element.StartsWith("<ol")) {
-                            ctx.ListDepth++;
-                        } else if (element.StartsWith("<li") && stack.Peek().StartsWith("<ul")) {
-                            var header = GetListHeader(ctx);
-                            html.Insert(end + 1, header);
-                            end = html.ToString().IndexOf('>', i + header.Length);
-                        } else if (element.StartsWith("<pre")) {
+                        if (element.StartsWith("<pre")) {
                             ctx.PreStart = end + 1;
                         } else if (element.StartsWith("<code")) {
                             ctx.CodeStart = end + 1;
@@ -136,18 +128,9 @@ namespace MdViewer {
 
         private record HtmlContext {
             public int PreStart = 0;
-            public int ListDepth = 0;
             public int CodeStart = 0;
             public string CodeContent = "";
             public string CodeLang = "";
-        }
-
-        private static string GetListHeader(in HtmlContext ctx) {
-            return ctx.ListDepth switch {
-                1 => @"<span class=""ul-h"">●</span>",
-                2 => @"<span class=""ul-h"">○</span>",
-                _ => @"<span class=""ul-h"">■</span>",
-            };
         }
 
         private static string GetPre(in HtmlContext ctx) {
