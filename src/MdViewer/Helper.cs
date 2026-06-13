@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Text;
 
 namespace MdViewer {
-    public static class Helper {
+    internal static class Helper {
         public static string GetEmbeddedResource(string resourceName) {
             var assembly = Assembly.GetExecutingAssembly();
             using Stream? stream = assembly.GetManifestResourceStream(resourceName);
